@@ -1,0 +1,5 @@
+flask
+opencv-python
+picamera2
+adafruit-circuitpython-pca9685
+adafruit-circuitpython-servokit

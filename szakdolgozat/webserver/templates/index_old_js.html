@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[DEV] Controll</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+</head>
+
+<body>
+
+  <div class="stream-div">
+    <img class="stream" src="{{ url_for('stream') }}" width="100%" />
+  </div>
+
+  <div class="dpad prevent-select">
+    <div id="forward" class="button forward">↑</div>
+    <div id="left" class="button left">←</div>
+    <div id="right" class="button right">→</div>
+    <div id="backward" class="button backward">↓</div>
+  </div>
+
+  <script type="text/javascript">
+    
+    
+    
+    const buttons = document.querySelectorAll(".button");
+    /*
+    let intervalId;
+
+    function startAction(id) {
+      btnFunction(id); // Run immediately on press
+      intervalId = setInterval(() => btnFunction(id), 100); // Repeat every 100ms
+    }
+    
+    function stopAction() {
+      clearInterval(intervalId);
+    }
+    */
+    buttons.forEach(button => {
+    /*
+      //Touch start
+      button.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+        //startAction(this.id);
+        btnFunction(this.id, true);
+      });
+
+      //Touch end
+      button.addEventListener('touchend', function(event) {
+        event.preventDefault();
+        //stopAction();
+        btnFunction(this.id, false);
+      });
+
+      //Touch cancel
+      button.addEventListener('touchcancel', function(event) {
+        event.preventDefault();
+        //stopAction();
+        btnFunction(this.id, false);
+      });
+*/
+      //Mouse down
+      button.addEventListener('mousedown', function(event) {
+        event.preventDefault();
+        //startAction(this.id);
+        btnFunction(this.id, true);
+      });
+
+    //Mouse up
+    button.addEventListener('mouseup', function(event) {
+      event.preventDefault();
+      //stopAction();
+      btnFunction(this.id, false);
+    });
+    /*
+    //Mouse leave
+    button.addEventListener('mouseleave', function(event) {
+      event.preventDefault();
+      //stopAction();
+      btnFunction(this.id, false);
+    });*/
+  });
+
+    async function btnFunction(direction, should_move) {
+      console.log(direction);
+      console.log(should_move);
+      const a = await fetch("/update?direction=" + direction + "&should-move=" + should_move)
+    }
+  </script>
+</body>
+
+</html>

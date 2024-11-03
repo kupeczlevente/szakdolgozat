@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[DEV] Szakdolgozat</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+</head>
+
+<body>
+
+<!--
+  <div class="stream-div">
+    <img class="stream" src="{{ url_for('stream') }}" width="100%" />
+  </div>
+-->
+
+  <div class="dpad prevent-select">
+    <div id="up" class="button up">↑</div>
+    <div id="left" class="button left">←</div>
+    <div id="right" class="button right">→</div>
+    <div id="down" class="button down">↓</div>
+  </div>
+
+  <script type="text/javascript">
+
+    const buttons = document.querySelectorAll(".button");
+    let intervalId;
+
+    function startAction(id) {
+      btnFunction(id); // Run immediately on press
+      intervalId = setInterval(() => btnFunction(id), 100); // Repeat every 100ms
+    }
+
+    function stopAction() {
+      clearInterval(intervalId);
+    }
+
+    buttons.forEach(button => {
+      
+      //Touch start
+      button.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+        startAction(this.id);
+      });
+
+      //Touch end
+      button.addEventListener('touchend', function(event) {
+        event.preventDefault();
+        stopAction();
+      });
+
+      //Touch cancel
+      button.addEventListener('touchcancel', function(event) {
+        event.preventDefault();
+        stopAction();
+      });
+
+      //Mouse down
+      button.addEventListener('mousedown', function(event) {
+        event.preventDefault();
+        startAction(this.id);
+      });
+
+      //Mouse up
+      button.addEventListener('mouseup', function(event) {
+        event.preventDefault();
+        stopAction();
+      });
+
+      //Mouse leave
+      button.addEventListener('mouseleave', function(event) {
+        event.preventDefault();
+        stopAction();
+      });
+    });
+
+    async function btnFunction(direction) {
+      console.log(direction);
+      const a = await fetch("/update?direction=" + direction)
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[DEV] Controll</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+</head>
+
+<body>
+
+  <div class="stream-div">
+    <img class="stream" src="{{ url_for('stream') }}" width="100%" />
+  </div>
+
+  <div class="dpad prevent-select">
+    <div id="forward" class="button forward">↑</div>
+    <div id="left" class="button left">←</div>
+    <div id="right" class="button right">→</div>
+    <div id="backward" class="button backward">↓</div>
+  </div>
+
+  <script type="text/javascript">
+    document.getElementById("forward").onmousedown = function() {
+        fetch('/move_forward', { method: 'POST' });
+    };
+    document.getElementById("forward").onmouseup = function() {
+        fetch('/stop', { method: 'POST' });
+    };
+
+    document.getElementById("forward").touchstart = function() {
+      fetch('/move_forward', { method: 'POST' });
+    };
+    document.getElementById("forward").touchend = function() {
+        fetch('/stop', { method: 'POST' });
+    };
+
+
+
+    document.getElementById("backward").onmousedown = function() {
+        fetch('/move_backward', { method: 'POST' });
+    };
+    document.getElementById("backward").onmouseup = function() {
+        fetch('/stop', { method: 'POST' });
+    };
+    
+    document.getElementById("backward").touchstart = function() {
+        fetch('/move_backward', { method: 'POST' });
+    };
+    document.getElementById("backward").touchend = function() {
+        fetch('/stop', { method: 'POST' });
+    };
+
+
+
+    document.getElementById("right").onmousedown = function() {
+      fetch('/rotate_right', { method: 'POST' });
+    };
+    document.getElementById("right").onmouseup = function() {
+        fetch('/stop', { method: 'POST' });
+    };
+    
+    document.getElementById("right").touchstart = function() {
+      fetch('/rotate_right', { method: 'POST' });
+    };
+    document.getElementById("right").touchend = function() {
+        fetch('/stop', { method: 'POST' });
+    };
+
+
+
+    document.getElementById("left").onmousedown = function() {
+      fetch('/rotate_left', { method: 'POST' });
+    };
+    document.getElementById("left").onmouseup = function() {
+        fetch('/stop', { method: 'POST' });
+    };
+    
+    document.getElementById("left").touchstart = function() {
+      fetch('/rotate_left', { method: 'POST' });
+    };
+    document.getElementById("left").touchend = function() {
+        fetch('/stop', { method: 'POST' });
+    };
+
+  </script>
+</body>
+
+</html>
